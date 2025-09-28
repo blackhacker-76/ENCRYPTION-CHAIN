@@ -74,9 +74,8 @@ def main():
         print("="*50)
         print("I   — ENCRYPT PASS")
         print("II  — DECRYPT PASS")
-        print("III — MAKE PASS")
         
-        choice = input("??? — 1, 2 OR 3 — ").strip()
+        choice = input("??? — 1 OR 2 — ").strip()
         
         if choice == "1":
             print("ENCRYPT PASS")
@@ -115,28 +114,6 @@ def main():
             except Exception as e:
                 print(f"{e}")
                 print("CHECK THE CONTENT IS CORRECT")
-                
-        elif choice == "3":
-            print("PASS GENERATOR")
-            length = int(input("PASS LENGHT — ") or 16)
-            
-            chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?"
-            if length <= 64:
-                secure_password = ''.join(chars[i % len(chars)] for i in hashlib.sha512(generate_salt(64).encode()).digest())[:length]
-            else:
-                secure_password = ''
-                while len(secure_password) < length:
-                    chunk = ''.join(chars[i % len(chars)] for i in hashlib.sha512(generate_salt(64).encode()).digest())
-                    secure_password += chunk
-                secure_password = secure_password[:length]
-            
-            print("="*50)
-            print(f"PASS — {secure_password}")
-            print(f"LENGTH — {len(secure_password)} symbols")
-            print(f"ENTROPY — ~{length * 6} bit")
-                
-        else:
-            print("???")
 
 if __name__ == "__main__":
     main()
